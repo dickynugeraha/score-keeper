@@ -13,11 +13,9 @@ const maxScore = document.querySelector("#maxScore");
 const reset = document.querySelector("#reset");
 
 let isWinning = false;
-let isMaxScore = false;
 let isPopup = false;
 
 maxScore.addEventListener("change", () => {
-  isMaxScore = true;
   winScore = parseInt(maxScore.value);
   resetValue();
 });
@@ -34,20 +32,16 @@ reset.addEventListener("click", () => {
 
 function updateScores(player, opponent) {
   if (!isWinning) {
-    if (isMaxScore) {
-      player.score += 1;
-      if (player.score === winScore) {
-        isWinning = true;
-        player.display.classList.add("has-text-success-dark");
-        opponent.display.classList.add("has-text-danger-dark");
-        player.button.disabled = true;
-        opponent.button.disabled = true;
-        createPopup();
-      }
-      player.display.innerText = player.score;
-    } else {
-      alert("Pleace set max score!");
+    player.score += 1;
+    if (player.score === winScore) {
+      isWinning = true;
+      player.display.classList.add("has-text-success-dark");
+      opponent.display.classList.add("has-text-danger-dark");
+      player.button.disabled = true;
+      opponent.button.disabled = true;
+      createPopup();
     }
+    player.display.innerText = player.score;
   } else {
     alert("Game has been finished, pleace reset value!");
   }
